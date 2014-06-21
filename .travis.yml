@@ -6,6 +6,8 @@ rvm:
   - 1.9.3
 
 before_script:
+  - echo 'UTC' | sudo tee /etc/timezone
+  - sudo dpkg-reconfigure --frontend noninteractive tzdata
   - cp $PWD/config/database.yml.example $PWD/config/database.yml
   - psql -c 'create database bi_test;' -U postgres
   - bundle exec rake db:migrate
