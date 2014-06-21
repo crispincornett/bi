@@ -9,3 +9,4 @@ rvm:
 before_script:
   - cp $PWD/config/database.yml.example $PWD/config/database.yml
   - psql -c 'create database bi_test;' -U postgres
+  - bundle exec rake db:test:prepare
