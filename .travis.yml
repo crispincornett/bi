@@ -7,5 +7,5 @@ rvm:
   - 1.8.7
 
 before_script:
-  - cp config/database.yml.sample config/database.yml
+  - cp $PWD/config/database.yml.example $PWD/config/database.yml
   - psql -c 'create database bi_test;' -U postgres
