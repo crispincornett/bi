@@ -148,8 +148,8 @@ A sample query using this marker may look like the following:
     , Count(*) as count
     FROM accounts
     WHERE registered_at between '<%= start_date %>' AND '<%= end_date %>'
-    GROUP BY date_trunc(<%= group_by_range %>, created_at)
-    ORDER BY date_trunc(<%= group_by_range %>, created_at) DESC
+    GROUP BY date_trunc('<%= group_by_range %>', created_at)
+    ORDER BY date_trunc('<%= group_by_range %>', created_at) DESC
 
 The user will see a dropdown with options for `day`, `week`, `month`, `quarter` and `year`, and can group that data however they want
 
