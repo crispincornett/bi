@@ -29,8 +29,10 @@ class KpiCalculatorTest < ActiveSupport::TestCase
                     COUNT(CASE WHEN a.created_at BETWEEN '2013-01-0104:00:00-0500' AND '2013-03-1604:00:00-0400' THEN a.id ELSE NULL END) as YTD
                     FROM accounts a
                     WHERE a.created_at BETWEEN '2013-01-0104:00:00-0500' AND '2013-03-1604:00:00-0400'"
-      calculator = KpiCalculator.new(kpi, date)
-      assert_equal calculator.build_sql.gsub(/\s+/,""), correct_kpi.gsub(/\s+/,"")
+      Time.use_zone('Eastern Time (US & Canada)') do
+        calculator = KpiCalculator.new(kpi, date)
+        assert_equal correct_kpi.gsub(/\s+/,""), calculator.build_sql.gsub(/\s+/,"")
+      end
     end
   end
 
