@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/paperlesspost/bi.svg?branch=master)](https://travis-ci.org/paperlesspost/bi)
+
 ## BI
 
 BI is a rails app built at Paperless Post to solve our business reporting needs.
