@@ -62,8 +62,8 @@ class KpiCalculator
   def build_sql
     date = @date.strftime("%m/%d/%Y")
 
-    kpi_date = Time.strptime(date,"%m/%d/%Y").strftime("%Y-%m-%d")
-    end_date = Time.strptime(date,"%m/%d/%Y") + 1.days + TIMEZONE_OFFSET.hours
+    kpi_date = Time.strptime(date,"%m/%d/%Y").in_time_zone.strftime("%Y-%m-%d")
+    end_date = Time.strptime(date,"%m/%d/%Y").in_time_zone + 1.days + TIMEZONE_OFFSET.hours
 
     today_start      = end_date - 1.days
     seven_day_start  = end_date - 7.days
