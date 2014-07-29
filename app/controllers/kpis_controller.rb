@@ -2,8 +2,7 @@ class KpisController < ApplicationController
   skip_before_filter :require_user, :only => [:index, :show, :tags]
 
   def create
-    last_run_hash = {:last_run => Time.now, :last_succeeded => Time.now - 1.year}
-    @kpi = Kpi.new(params[:kpi].merge(last_run_hash))
+    @kpi = Kpi.new(params[:kpi])
     if @kpi.save
       flash[:success] = "Kpi Added"
       redirect_to kpi_path(@kpi)
