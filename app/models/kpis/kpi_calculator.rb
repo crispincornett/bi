@@ -63,13 +63,13 @@ class KpiCalculator
     date = @date.strftime("%m/%d/%Y")
 
     kpi_date = Time.strptime(date,"%m/%d/%Y").strftime("%Y-%m-%d")
-    end_date = Time.strptime(date,"%m/%d/%Y") + 1.days + 4.hours
+    end_date = Time.strptime(date,"%m/%d/%Y") + 1.days + TIMEZONE_OFFSET.hours
 
     today_start      = end_date - 1.days
     seven_day_start  = end_date - 7.days
     thirty_day_start = end_date - 30.days
-    quarter_start    = today_start.beginning_of_quarter + 4.hours
-    year_start       = today_start.beginning_of_year + 4.hours
+    quarter_start    = today_start.beginning_of_quarter + TIMEZONE_OFFSET.hours
+    year_start       = today_start.beginning_of_year + TIMEZONE_OFFSET.hours
     start_date       = (year_start > thirty_day_start) ? thirty_day_start : year_start
 
     ERB.new(@kpi.query).result(binding)
