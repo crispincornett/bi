@@ -2,7 +2,8 @@
   .span12
     %h2=@kpi.name
     %strong Last Run:
-    = @kpi.most_recent_result.date.strftime("%m/%d/%y")
+    - if @kpi.most_recent_result.present?
+      = @kpi.most_recent_result.date.strftime("%m/%d/%y")
 
 .row
   .span12= render tag_partial(@kpi)
