@@ -10,7 +10,7 @@ class DbConnection
   end
 
   def execute(query, options = {})
-    QueryResultPresenter::Presenter.new(connection.execute(query, options))
+    QueryResultPresenter::Presenter.new(connection.exec_query(query, options))
   end
 
   private
