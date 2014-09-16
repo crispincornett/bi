@@ -36,7 +36,7 @@ class Kpi < ActiveRecord::Base
   def backfill(start = Date.new(2010,1,1), only_empty = true)
     date = start
     while date < Time.now.to_date do
-      calculate(date) unless only_empty && result_for_date(date).present?
+      calculate!(date) unless only_empty && result_for_date(date).present?
       date +=1
     end
   end
