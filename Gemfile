@@ -18,6 +18,7 @@ gem 'typhoeus'
 gem 'textacular', '~> 3.0', :require => 'textacular/rails'
 gem 'chronic'
 gem 'query_result_presenter'
+gem 'redcarpet'
 
 
 # Gems used only for assets and not required

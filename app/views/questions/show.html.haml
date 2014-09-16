@@ -15,7 +15,8 @@
       = @question.name
     %p
       %strong Description:
-      = @question.description
+      :markdown
+        #{@question.description}
 
     %p
       %strong Inputs:
