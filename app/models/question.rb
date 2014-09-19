@@ -43,6 +43,17 @@ class Question < ActiveRecord::Base
     }
   end
 
+  def filename(options)
+    tokens = ['Q' + self.id.to_s]
+    if options
+      tokens += options.to_a.flatten
+    end
+
+    tokens << Date.today.to_s
+
+    tokens.join('.') + '.csv'
+  end
+
   private
   def question_connection
     @question_connection || ConnectionChooser.new(data_source).connection

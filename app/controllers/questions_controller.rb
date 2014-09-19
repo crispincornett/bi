@@ -62,11 +62,11 @@ class QuestionsController < ApplicationController
   def download_result
     @question = Question.find(params[:id])
     @result = @question.perform(params[:inputs])
-    filename = "#{@question.name}_#{Time.now.strftime("%m_%d_%y")}.csv"
-    answer = @result.to_csv_data.insert(0, "Question #{@question.id} - #{@question.name} - With Params #{params[:inputs].to_s.gsub(",","")}\n\n")
+    timestamp = Time.now.to_s
+    answer = @result.to_csv_data.insert(0, "Question #{@question.id} - #{@question.name} - With Params #{params[:inputs].to_s.gsub(",","")} - Run on #{timestamp}\n\n")
     send_data answer,
       :type => 'text/csv; charset=iso-8859-1; header=present',
-      :disposition => "attachment; filename=#{filename}"
+      :disposition => "attachment; filename=#{@question.filename(params[:inputs])}"
   end
 
   def result

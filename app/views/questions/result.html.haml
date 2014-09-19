@@ -31,6 +31,7 @@
     .span12
       - if @result.count < 500
         #result_table
-          = @result.to_html_table.html_safe
+          :preserve
+            #{autolink(@result.to_html_table.html_safe, :link => :urls, :sanitize => false)}
       - else
         This file has too many results to display. Please download the csv.
