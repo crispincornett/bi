@@ -31,6 +31,10 @@ class KpisController < ApplicationController
     @results = @kpi.results_between_dates(@start_date, @end_date)
     respond_to do |format|
       format.html
+      format.csv { send_data @kpi.csv_between_dates(@start_date, @end_date, params[:id]),
+        :type => 'text/csv; charset=iso-8859-1; header=present',
+        :disposition => "attachment; filename=kpi.#{params[:id]}.#{@start_date}--#{@end_date}.csv"
+      }
       format.json { render :json => @results }
     end
   end
