@@ -45,6 +45,43 @@ class Kpi < ActiveRecord::Base
     kpi_connection
   end
 
+  def csv_between_dates(start_date, end_date, kpi_id)
+    results = results_between_dates(start_date, end_date)
+    headers = ['Date',
+               'Today',
+               '% Change',
+               'T7Days',
+               '% Change',
+               'T30Days',
+               '% Change',
+               'QTD',
+               'YTD']
+    columns = [:date,
+               :today,
+               :today_pct_change,
+               :t7days,
+               :t7days_pct_change,
+               :t30days,
+               :t30days_pct_change,
+               :qtd,
+               :ytd]
+
+    report = CSV.generate do |csv|
+      csv << ['KPI ' + self.id.to_s + ': ' + self.name]
+      csv << ["Results from %s until %s" % [start_date, end_date]]
+      csv << ['Run on %s' % Time.now.to_s]
+      csv << []
+      csv << headers
+      results.each do |r|
+        row = []
+        columns.each do |col|
+          row << r[col]
+        end
+        csv << row
+      end
+    end
+  end
+
   private
 
   def kpi_connection
